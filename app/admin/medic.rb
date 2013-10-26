@@ -11,12 +11,13 @@ ActiveAdmin.register Medic do
       f.input :name
       f.input :prename
       f.input :title
+      f.input :address
     end
     f.actions
   end
   controller do
     def permitted_params
-      params.permit medic: [:name, :prename, :title]
+      params.permit medic: [:name, :prename, :title, :address]
     end
   end
 end
