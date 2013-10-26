@@ -12,7 +12,7 @@ ActiveAdmin.register Appointment do
   member_action :push, :method => :get do
     @appointment = Appointment.find(params[:id])
 
-    options = { :body => {:phoneNumber => @appointment.patient.tel_number, :message => "Ihr Termin bei #{@appointment.medic.title} #{@appointment.medic.name} wurde geändert."[0,50], :serviceURL => "https://raw.github.com/DoctorPush/doctor/master/appointment_test.json"}}
+    options = { :body => {:phoneNumber => @appointment.patient.tel_number, :message => "Ihr Termin bei #{@appointment.medic.title} #{@appointment.medic.name} wurde geändert."[0,50], :serviceURL => "https://rawgithub.com/DoctorPush/doctor/master/appointment_test.json"}}
     response = HTTParty.post("http://pushdoc.delphinus.uberspace.de/api/message", options)
 
     redirect_to({action: :show, id: params[:id]})
