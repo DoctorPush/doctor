@@ -25,7 +25,6 @@ ActiveAdmin.register Appointment do
     end
   end
 
-
   controller do
     def permitted_params
       params.permit appointment: [:patient_id, :medic_id, :start_date, :start_time_hour, :start_time_minute, :end_date, :end_time_hour, :end_time_minute]
@@ -44,7 +43,6 @@ ActiveAdmin.register Appointment do
         @appointment.create_activity :update, :owner => current_admin_user, :parameters => activity_parameters
     end
 
-
     alias_method :create_appointment, :create
     def create
         create_appointment
@@ -52,5 +50,4 @@ ActiveAdmin.register Appointment do
         @appointment.create_activity :create, :owner => current_admin_user
     end
   end
-
 end
