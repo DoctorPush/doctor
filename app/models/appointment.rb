@@ -1,4 +1,7 @@
 class Appointment < ActiveRecord::Base
+  include PublicActivity::Common
+  include ActiveModel::Dirty
+
   belongs_to :patient
   belongs_to :medic
 

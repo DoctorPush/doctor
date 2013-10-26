@@ -54,4 +54,6 @@ gem "angularjs-rails"
 gem 'angular-ui-rails'
 gem 'angular-ui-bootstrap-rails'
 
+gem 'public_activity'
+
 
