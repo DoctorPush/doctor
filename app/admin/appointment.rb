@@ -9,6 +9,23 @@ ActiveAdmin.register Appointment do
     f.actions
   end
 
+  show do |appointment|
+    attributes_table do
+      row :start
+      row :end
+      row :patient
+      row :medic
+      row 'History' do
+        ul do
+          PublicActivity::Activity.where(trackable:appointment).each do |activity|
+            li "#{activity.key} #{activity.parameters.to_json}"
+          end
+        end
+      end
+    end
+  end
+
+
   controller do
     def permitted_params
       params.permit appointment: [:patient_id, :medic_id, :start_date, :start_time_hour, :start_time_minute, :end_date, :end_time_hour, :end_time_minute]
@@ -16,7 +33,6 @@ ActiveAdmin.register Appointment do
 
     alias_method :update_appointment, :update
     def update
-
         @old_appointment = Appointment.find(params["id"]) #Horrable hack because _changed? dosn't work
 
         update_appointment
@@ -26,6 +42,14 @@ ActiveAdmin.register Appointment do
         activity_parameters.merge!({:'end' => @appointment.end, end_was: @old_appointment.end}) if @appointment.end != @old_appointment.end
 
         @appointment.create_activity :update, :owner => current_admin_user, :parameters => activity_parameters
+    end
+
+
+    alias_method :create_appointment, :create
+    def create
+        create_appointment
+
+        @appointment.create_activity :create, :owner => current_admin_user
     end
   end
 
