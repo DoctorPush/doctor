@@ -56,4 +56,6 @@ gem 'angular-ui-bootstrap-rails'
 
 gem 'public_activity'
 
+gem 'httparty'
+
 
