@@ -8,6 +8,8 @@ gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'bootstrap-sass'#, :github => "thomas-mcdonald/bootstrap-sass"
+gem 'compass-rails', "~> 2.0.alpha.0"
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -43,3 +45,13 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem "just-datetime-picker"
+
+gem "angularjs-rails"
+gem 'angular-ui-rails'
+gem 'angular-ui-bootstrap-rails'
+
+
