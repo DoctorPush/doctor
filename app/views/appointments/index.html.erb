@@ -30,6 +30,16 @@
 
 <br>
 
+<%= current_admin_user.authentication_token.blank? ? "Token Empty" : current_admin_user.authentication_token %></p>
+
+<p><%= link_to "Generate Token", token_authentications_path(:admin_user_id => current_admin_user.id), :method => :post, :confirm => "Are you sure?"  %>
+<%= link_to "Delete Token", token_authentication_path(current_admin_user), :method => :delete, :confirm => "Are you sure?"  %></p>
+
+<% if current_admin_user.authentication_token %>
+  <p>You can use this url to login<br />
+  <%= link_to "http://localhost:3000#{root_path(:auth_token => current_admin_user.authentication_token)}", root_path(:auth_token => current_admin_user.authentication_token)  %></p>
+<% end %>
+
 <%= link_to 'New Appointment', new_appointment_path %>
 <div ng-controller="AppointmentCtrl">
 <div ui-calendar="uiConfig.calendar" ng-model="appointments">

@@ -8,6 +8,9 @@ Doctor::Application.routes.draw do
 
   resources :patients
 
+  resources :token_authentications, :only => [:create, :destroy]
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
