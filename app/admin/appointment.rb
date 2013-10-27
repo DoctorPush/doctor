@@ -42,7 +42,7 @@ ActiveAdmin.register Appointment do
 
   controller do
     def permitted_params
-      params.permit appointment: [:patient_id, :medic_id, :start, :end, :start_date, :start_time_hour, :start_time_minute, :end_date, :end_time_hour, :end_time_minute, :title, :created_at, : updated_at]
+      params.permit appointment: [:patient_id, :medic_id, :start, :end, :start_date, :start_time_hour, :start_time_minute, :end_date, :end_time_hour, :end_time_minute, :title, :created_at, :updated_at]
     end
 
     alias_method :update_appointment, :update
