@@ -14,9 +14,11 @@ class Appointment < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(
-      :include => [:patient, :medic , {:history => {include: [:owner]}}]
+    h = super(
+      :include => [:patient, :medic ,{:history => {include: [:owner]}}]
     )
+    h[:allDay] = false
+    h
   end
 
 end

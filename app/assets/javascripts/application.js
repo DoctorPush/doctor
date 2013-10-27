@@ -13,4 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require fullcalendar
+//= require angular
+//= require angular-ui
+//= require angular-resource
+//= require angular-ui-bootstrap-tpls
+//= require calendar
 //= require_tree .

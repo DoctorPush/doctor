@@ -1,6 +1,7 @@
 ActiveAdmin.register Appointment do
   form do |f|
     f.inputs "Patient Details" do
+      f.input :title
       f.input :patient
       f.input :medic
       f.input :start, :as => :just_datetime_picker
@@ -24,6 +25,7 @@ ActiveAdmin.register Appointment do
 
   show do |appointment|
     attributes_table do
+      row :title
       row :start
       row :end
       row :patient
@@ -40,7 +42,7 @@ ActiveAdmin.register Appointment do
 
   controller do
     def permitted_params
-      params.permit appointment: [:patient_id, :medic_id, :start_date, :start_time_hour, :start_time_minute, :end_date, :end_time_hour, :end_time_minute]
+      params.permit appointment: [:patient_id, :medic_id, :start, :end, :start_date, :start_time_hour, :start_time_minute, :end_date, :end_time_hour, :end_time_minute, :title, :created_at, :updated_at]
     end
 
     alias_method :update_appointment, :update

@@ -31,3 +31,7 @@
 <br>
 
 <%= link_to 'New Appointment', new_appointment_path %>
+<div ng-controller="AppointmentCtrl">
+<div ui-calendar="uiConfig.calendar" ng-model="appointments">
+</div>
+</div>

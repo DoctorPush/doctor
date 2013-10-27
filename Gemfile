@@ -58,4 +58,7 @@ gem 'public_activity'
 
 gem 'httparty'
 
+gem 'fullcalendar-rails'
+
+gem 'rails_12factor'
 
