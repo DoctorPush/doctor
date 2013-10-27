@@ -23,6 +23,7 @@ class Appointment < ActiveRecord::Base
     )
     h[:allDay] = false
     h[:title_calendar] = title_calendar
+    h[:waiting_persons] = 4
     h
   end
 

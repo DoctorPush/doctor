@@ -1,3 +1,4 @@
+<!--
 <h1>Listing appointments</h1>
 
 <table>
@@ -39,8 +40,8 @@
   <p>You can use this url to login<br />
   <%= link_to "http://localhost:3000#{root_path(:auth_token => current_admin_user.authentication_token)}", root_path(:auth_token => current_admin_user.authentication_token)  %></p>
 <% end %>
-
 <%= link_to 'New Appointment', new_appointment_path %>
+-->
 <div ng-controller="AppointmentCtrl">
 <div ui-calendar="uiConfig.calendar" ng-model="appointments">
 </div>
