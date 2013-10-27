@@ -14,7 +14,7 @@ class Appointment < ActiveRecord::Base
   end
 
   def title_calendar
-    "#{self.patient.title} #{self.patient.name}, #{self.patient.prename} #{self.title}"
+    self.patient && "#{self.patient.title} #{self.patient.name}, #{self.patient.prename} #{self.title}"
   end
 
   def as_json(options={})

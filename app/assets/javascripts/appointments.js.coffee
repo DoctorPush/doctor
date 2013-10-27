@@ -16,17 +16,56 @@ app.config(["$httpProvider", (provider) ->
 app.factory "Appointment", ($resource) ->
 	$resource("/admin/appointments/:id", {id: "@id"}, {update: {method: "PUT"}})
 
-@AppointmentCtrl = ($scope, $log, Appointment) ->
+app.factory "Patient", ($resource) ->
+  $resource("/admin/patients/:id", {id: "@id"}, {update: {method: "PUT"}})
+
+app.factory "Medic", ($resource) ->
+  $resource("/admin/medics/:id", {id: "@id"}, {update: {method: "PUT"}})
+
+@AppointmentCtrl = ($scope, $log, Appointment, Patient, Medic, $http) ->
     $scope.appointments = [Appointment.query()]
+
+    $scope.patients = Patient.query(->
+      $scope.patient = $scope.patients[0]
+    )
+    $scope.medics = Medic.query(->
+      $scope.medic = $scope.medics[0]
+    )
+    $scope.changed = {};
+
+    $scope.notify = (appointment) ->
+      $http({method: 'GET', url: '/admin/appointments/' + appointment.id + "/push"}).success((data, status, headers, config) ->
+        delete $scope.changed[appointment.id]
+      ).error((data, status, headers, config) ->
+
+      )
 
     $scope.alertOnDrop = (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) ->
         $scope.$apply -> console.log('Event Droped to make dayDelta ' + dayDelta)
         console.dir(event)
         Appointment.update(event)
+        $scope.changed[event.id] = event
 
     $scope.alertOnResize = (event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ) ->
         $scope.$apply -> console.log('Event Droped to make dayDelta ' + dayDelta)
         Appointment.update(event)
+        $scope.changed[event.id] = event
+
+    $scope.alertEventOnClick = (date, allDay, jsEvent, view ) ->
+      newDate = Appointment.get({id:"new"}, ->
+        newDate.start = date
+        newDate.end = new Date(date.getTime() + 1000 * 60 * 60)
+        newDate.title = $scope.patient.name + ", " + $scope.patient.prename
+        newDate.medic = $scope.medic
+        newDate.medic_id = $scope.medic.id
+        newDate.patient = $scope.patient
+        newDate.patient_id = $scope.patient.id
+        Appointment.save(newDate, (data) ->
+          newDate.id = data.id
+          $scope.changed[newDate.id] = newDate
+        )
+        $scope.appointments[0].push(newDate)
+      );
 
     $scope.uiConfig = {
       calendar:{

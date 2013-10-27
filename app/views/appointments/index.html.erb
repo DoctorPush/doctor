@@ -43,6 +43,15 @@
 <%= link_to 'New Appointment', new_appointment_path %>
 -->
 <div ng-controller="AppointmentCtrl">
-<div ui-calendar="uiConfig.calendar" ng-model="appointments">
+  Patient: <select ng-model="patient" ng-options="(p.title + ' ' + p.name + ', ' + p.prename) for p in patients">
+          <option value="">-- choose patient --</option>
+  </select>
+    Medic: <select ng-model="medic" ng-options="(m.title + ' ' + m.name) for m in medics">
+          <option value="">-- choose medic --</option>
+  </select>
+  <button ng-click="notify(changedAppointment)" ng-repeat="changedAppointment in changed">
+   Push to {{ changedAppointment.patient.name }} 
+  </button>
+<div ui-calendar="uiConfig.calendar" ng-model="appointments" calendar="myCalendar">
 </div>
 </div>
