@@ -30,8 +30,10 @@ app.factory "Appointment", ($resource) ->
 
     $scope.uiConfig = {
       calendar:{
-        height: 450,
+        ignoreTimezone: false,
+        height: 600,
         editable: true,
+        defaultView: 'agendaWeek',
         header:{
           left: 'month basicWeek basicDay agendaWeek agendaDay',
           center: 'title',

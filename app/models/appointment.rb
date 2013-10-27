@@ -13,11 +13,16 @@ class Appointment < ActiveRecord::Base
   	PublicActivity::Activity.where(trackable:self)
   end
 
+  def title_calendar
+    "#{self.patient.title} #{self.patient.name}, #{self.patient.prename} #{self.title}"
+  end
+
   def as_json(options={})
     h = super(
       :include => [:patient, :medic ,{:history => {include: [:owner]}}]
     )
     h[:allDay] = false
+    h[:title_calendar] = title_calendar
     h
   end
 
